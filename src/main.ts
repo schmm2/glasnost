@@ -9,7 +9,7 @@ async function bootstrap() {
   .setTitle("Glasnost API")
   .setDescription("Glast API Description")
   .setVersion("0.1")
-  .addTag("glasnost")
+  .addTag("")
   .build();
   const document = SwaggerModule.createDocument(app,options);
   SwaggerModule.setup('api',app,document);

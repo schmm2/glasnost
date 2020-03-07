@@ -8,6 +8,10 @@ export class EndpointsService {
         return "hello endpoints 2";
     }
 
+    getEnpoint(id: number): string {
+        return `YOUR ID IS: ${id}`;
+    }
+
     createEndpoints(endpoint: Endpoint){
         return `Endpoint title ${endpoint.title}`;
     }

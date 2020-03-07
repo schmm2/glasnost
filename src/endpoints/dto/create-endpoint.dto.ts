@@ -5,5 +5,8 @@ export class CreateEndpointDto {
     readonly title: string;
 
     @ApiProperty()
-    readonly author: string;
+    readonly  url: string;
+
+    @ApiProperty()
+    readonly public: boolean;
 }
