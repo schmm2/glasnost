@@ -1,5 +1,5 @@
 export interface Endpoint {
-    id: string;
+    id?: string;
     title: string;
     url: string;
     public: boolean;

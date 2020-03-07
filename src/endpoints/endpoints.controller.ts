@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Put } from '@nestjs/common';
 import { EndpointsService } from './endpoints.service';
 import { CreateEndpointDto } from './dto/create-endpoint.dto';
 import { ApiTags, ApiParam } from '@nestjs/swagger'
@@ -22,9 +22,14 @@ constructor(private endpointsService: EndpointsService) {}
     }
 
     @Post()
-    createEndpoints(@Body() createEndpointDto: CreateEndpointDto): any {
+    createEndpoints(@Body() createEndpointDto: CreateEndpointDto): string {
         return this.endpointsService.createEndpoints(createEndpointDto);
     }
 
+    @ApiParam({name: 'id'})
+    @Put(':id')
+    updateEndpoint(@Param('id') id, @Body() updateEndpointDto: CreateEndpointDto): Endpoint{
+        return this.endpointsService.updateEndpoint(id, updateEndpointDto);
+    }
 }
 

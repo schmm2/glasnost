@@ -2,9 +2,6 @@ import { ApiProperty } from "@nestjs/swagger";
 
 export class CreateEndpointDto {
     @ApiProperty()
-    readonly id: string;
-
-    @ApiProperty()
     readonly title: string; 
 
     @ApiProperty()
