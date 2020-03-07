@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { Endpoint } from './interfaces/endpoint.interface';
 import { CreateEndpointDto } from './dto/create-endpoint.dto';
 import { Model } from 'mongoose';
@@ -15,7 +15,12 @@ export class EndpointsService {
     }
 
     async getEnpoint(id: string): Promise<Endpoint> {
-        return await this.endpointModel.findById(id);
+        try{
+            return await this.endpointModel.findById(id);
+        }
+        catch(err){
+            throw new HttpException('Item not found', HttpStatus.NOT_FOUND)
+        }        
     }
 
     createEndpoint(endpoint: Endpoint){

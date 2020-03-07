@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Put, Delete, Logger } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Put, Delete, Logger, HttpException, HttpStatus } from '@nestjs/common';
 import { EndpointsService } from './endpoints.service';
 import { CreateEndpointDto } from './dto/create-endpoint.dto';
 import { ApiTags, ApiParam } from '@nestjs/swagger'
@@ -22,8 +22,12 @@ constructor(private endpointsService: EndpointsService) {}
     }
 
     @Post()
-    createEndpoint(@Body() createEndpointDto: CreateEndpointDto): Promise<Endpoint> {
-        return this.endpointsService.createEndpoint(createEndpointDto);
+    async createEndpoint(@Body() createEndpointDto: CreateEndpointDto): Promise<Endpoint> {
+        try{
+            return await this.endpointsService.createEndpoint(createEndpointDto);
+        } catch(err){
+            throw new HttpException(err.message, HttpStatus.UNPROCESSABLE_ENTITY);
+        }
     }
 
     @ApiParam({name: 'id'})
