@@ -26,7 +26,13 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Glasnost server
+
+## Terms
+
+### Endpoints
+
+All kinds of systems we can get data from.
 
 ## Installation
 
