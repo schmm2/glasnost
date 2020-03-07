@@ -30,7 +30,7 @@ export class EndpointsService {
         const newEndpoint = this.endpointModel(endpoint);
         return newEndpoint.save();
     }
-
+ 
     updateEndpoint(id: string, updateEndpointDto: CreateEndpointDto): Endpoint{
         const data = this.endpoints.find(endpoint => endpoint.id === id);
         data.title = updateEndpointDto.title ? updateEndpointDto.title : data.title;
