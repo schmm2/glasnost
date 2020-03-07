@@ -1,28 +1,34 @@
 import { Injectable } from '@nestjs/common';
 import { Endpoint } from './interfaces/endpoint.interface';
 import { CreateEndpointDto } from './dto/create-endpoint.dto';
+import { Model } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
 export class EndpointsService {
+    constructor(
+        @InjectModel('Endpoint') private readonly endpointModel: Model<Endpoint>
+    ) {}
+    
     endpoints: Endpoint[] = [
         {
-            id: '1',
-            title: 'MS Graph',
-            public: false,
-            url: 'www'
+            title: 'dd',
+            url: '',
+            public: false
         }
     ]
 
     getEndpoints(): Endpoint[] { 
-        return this.endpoints;
+        return this.endpointModel.find().exec();
     }
 
     getEnpoint(id: string): Endpoint {
         return this.endpoints.find(endpoint => endpoint.id === id);
     }
 
-    createEndpoints(endpoint: Endpoint){
-        return `Endpoint title ${endpoint.title}`;
+    createEndpoint(endpoint: Endpoint){
+        const newEndpoint = this.endpointModel(endpoint);
+        return newEndpoint.save();
     }
 
     updateEndpoint(id: string, updateEndpointDto: CreateEndpointDto): Endpoint{

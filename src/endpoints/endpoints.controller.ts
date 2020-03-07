@@ -22,8 +22,8 @@ constructor(private endpointsService: EndpointsService) {}
     }
 
     @Post()
-    createEndpoints(@Body() createEndpointDto: CreateEndpointDto): string {
-        return this.endpointsService.createEndpoints(createEndpointDto);
+    createEndpoint(@Body() createEndpointDto: CreateEndpointDto): string {
+        return this.endpointsService.createEndpoint(createEndpointDto);
     }
 
     @ApiParam({name: 'id'})
