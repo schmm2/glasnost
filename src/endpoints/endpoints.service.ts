@@ -3,13 +3,22 @@ import { Endpoint } from './interfaces/endpoint.interface';
 
 @Injectable()
 export class EndpointsService {
+    endpoints = [
+        {
+            id: '1',
+            title: 'MS Graph',
+            public: false,
+            url: 'www'
+        }
+    ]
 
-    getEndpoints(): string { 
-        return "hello endpoints 2";
+
+    getEndpoints(): Endpoint[] { 
+        return this.endpoints;
     }
 
-    getEnpoint(id: number): string {
-        return `YOUR ID IS: ${id}`;
+    getEnpoint(id: string): Endpoint {
+        return this.endpoints.find(endpoint => endpoint.id === id);
     }
 
     createEndpoints(endpoint: Endpoint){
