@@ -9,21 +9,13 @@ export class EndpointsService {
     constructor(
         @InjectModel('Endpoint') private readonly endpointModel: Model<Endpoint>
     ) {}
-    
-    endpoints: Endpoint[] = [
-        {
-            title: 'dd',
-            url: '',
-            public: false
-        }
-    ]
 
-    getEndpoints(): Endpoint[] { 
-        return this.endpointModel.find().exec();
+    async getEndpoints(): Promise<Endpoint[]> { 
+        return await this.endpointModel.find().exec();
     }
 
-    getEnpoint(id: string): Endpoint {
-        return this.endpoints.find(endpoint => endpoint.id === id);
+    async getEnpoint(id: string): Promise<Endpoint> {
+        return await this.endpointModel.findById(id);
     }
 
     createEndpoint(endpoint: Endpoint){
@@ -31,14 +23,13 @@ export class EndpointsService {
         return newEndpoint.save();
     }
  
-    updateEndpoint(id: string, updateEndpointDto: CreateEndpointDto): Endpoint{
-        const data = this.endpoints.find(endpoint => endpoint.id === id);
-        data.title = updateEndpointDto.title ? updateEndpointDto.title : data.title;
-        data.url = updateEndpointDto.url ? updateEndpointDto.url : data.url;
-        return data;
+    async updateEndpoint(id: string, updateEndpointDto: CreateEndpointDto): Promise<Endpoint>{
+        return await this.endpointModel.findByIdAndUpdate(id,updateEndpointDto,{
+            new: true
+        });
     }
     
-    deleteEndpoint(id: string): Endpoint{
-        return this.endpoints.find(endpoint => endpoint.id === id);
+    async deleteEndpoint(id: string): Promise<any>{
+        return await this.endpointModel.findByIdAndRemove(id)
     }
 }

@@ -11,30 +11,30 @@ export class EndpointsController {
 constructor(private endpointsService: EndpointsService) {}
 
     @Get()
-    getEndpoints(): Endpoint[]{
+    getEndpoints(): Promise<Endpoint[]>{
         return this.endpointsService.getEndpoints();
     }
 
     @ApiParam({name: 'id'})
     @Get(':id')
-    getEndpoint(@Param('id') id): Endpoint{
+    getEndpoint(@Param('id') id): Promise<Endpoint>{
         return this.endpointsService.getEnpoint(id);
     }
 
     @Post()
-    createEndpoint(@Body() createEndpointDto: CreateEndpointDto): string {
+    createEndpoint(@Body() createEndpointDto: CreateEndpointDto): Promise<Endpoint> {
         return this.endpointsService.createEndpoint(createEndpointDto);
     }
 
     @ApiParam({name: 'id'})
     @Put(':id')
-    updateEndpoint(@Param('id') id, @Body() updateEndpointDto: CreateEndpointDto): Endpoint{
+    updateEndpoint(@Param('id') id, @Body() updateEndpointDto: CreateEndpointDto): Promise<Endpoint>{
         return this.endpointsService.updateEndpoint(id, updateEndpointDto);
     }
 
     @ApiParam({name: 'id'})
     @Delete(':id')
-    deleteEndpoint(@Param('id') id){
+    deleteEndpoint(@Param('id') id): Promise<any>{
         return this.endpointsService.deleteEndpoint(id);
     }
 }
