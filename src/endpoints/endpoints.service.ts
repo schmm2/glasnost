@@ -25,10 +25,14 @@ export class EndpointsService {
         return `Endpoint title ${endpoint.title}`;
     }
 
-    updateEndpoint(id: string, updateEndpointDto: CreateEndpointDto){
+    updateEndpoint(id: string, updateEndpointDto: CreateEndpointDto): Endpoint{
         const data = this.endpoints.find(endpoint => endpoint.id === id);
         data.title = updateEndpointDto.title ? updateEndpointDto.title : data.title;
         data.url = updateEndpointDto.url ? updateEndpointDto.url : data.url;
         return data;
+    }
+    
+    deleteEndpoint(id: string): Endpoint{
+        return this.endpoints.find(endpoint => endpoint.id === id);
     }
 }
